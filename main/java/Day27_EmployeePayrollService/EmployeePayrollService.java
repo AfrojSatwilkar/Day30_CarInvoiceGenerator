@@ -19,7 +19,7 @@ public class EmployeePayrollService {
         employeePayrollService.writeEmployeePayrollData();
     }
 
-    // This method is implementing Welcome Message
+    //This method is implementing Welcome Message
     public void printWelcomeMessage() {
         System.out.println("Welcome To The Employee Payroll Service System");
     }
@@ -27,9 +27,9 @@ public class EmployeePayrollService {
     private void readEmployeePayrollData(Scanner consoleInputReader) {
         System.out.println("Enter Employee ID : ");
         int id = consoleInputReader.nextInt();
-        //consoleInputReader.nextLine();
+        consoleInputReader.nextLine();
         System.out.println("Enter Employee Name : ");
-        String name = consoleInputReader.next();
+        String name = consoleInputReader.nextLine();
         System.out.println("Enter Employee Salary : ");
         double salary = consoleInputReader.nextDouble();
         employeePayrollList.add(new EmployeePayrollData(id, name, salary));
