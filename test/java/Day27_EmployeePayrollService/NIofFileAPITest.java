@@ -9,7 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.IntStream;
 
-public class FileUtilsTest {
+public class NIofFileAPITest {
     private static final String HOME = System.getProperty("user.home");
     private static final String PLAY_WITH_NIO = "PlayGround";
 
@@ -22,7 +22,7 @@ public class FileUtilsTest {
         // Delete File and Check File Not Exist
         Path playPath = Paths.get(HOME + "/" + PLAY_WITH_NIO);
         if (Files.exists(playPath))
-            FileUtils.deleteFiles(playPath.toFile());
+            NIofFileAPI.deleteFiles(playPath.toFile());
         Assertions.assertTrue(Files.notExists(playPath));
 
         // Create Directory
@@ -45,5 +45,11 @@ public class FileUtilsTest {
         Files.newDirectoryStream(playPath).forEach(System.out::println);
         Files.newDirectoryStream(playPath, path -> path.toFile().isFile() &&
                 path.toString().startsWith("temp")).forEach(System.out::println);
+    }
+    @Test
+    void givenADirectory_WhenWatched_ListsAllTheActivities() throws IOException {
+        Path dir = Paths.get(HOME + "/" + PLAY_WITH_NIO);
+        Files.list(dir).filter(Files::isRegularFile).forEach(System.out::println);
+        new WatchServices(dir).processEvents();
     }
 }
